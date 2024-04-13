@@ -4,6 +4,8 @@
  */
 package com.rakotomanga.tpbanquerakotomanga.jsf;
 
+import com.rakotomanga.tpbanquerakotomanga.entities.CompteBancaire;
+import com.rakotomanga.tpbanquerakotomanga.jsf.util.Util;
 import com.rakotomanga.tpbanquerakotomanga.service.GestionnaireCompte;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
@@ -29,7 +31,35 @@ public class Transfert implements Serializable {
     }
     
     public String transferer() {
+        boolean erreur = false;
+        CompteBancaire source = gestionnaireCompte.findById(this.getIdSource());
+        CompteBancaire destination = gestionnaireCompte.findById(this.getIdDestination());
+        if (source == null) {
+            Util.messageErreur("Aucun compte source avec cet id !", "Aucun compte source avec cet id !", "form:source");
+            erreur = true;
+        } else {
+            if (source.getSolde() < this.getSomme()) {
+                Util.messageErreur("Le solde du compte source est insuffisant", "Le solde du compte source est insuffisant", "form:montant");
+                erreur = true;
+            }
+        }
+        if (destination == null) {
+            Util.messageErreur("Aucun compte destination avec cet id !", "Aucun compte destination avec cet id !", "form:destination");
+            erreur = true;
+        }
+        
+        if (this.getSomme() < 0) {
+            Util.messageErreur("Le montant saisi est invalide", "Le montant saisi est invalide", "form:montant");
+            erreur = true;
+        }
+
+        if (erreur) {
+            return null;
+        }
         this.gestionnaireCompte.transferer(this.getIdSource(), this.getIdDestination(), this.getSomme());
+        String nomSource = source.getNom();
+        String nomDestination = destination.getNom();
+        Util.addFlashInfoMessage("Montant: " + somme + ", transferé depuis " + nomSource + " vers " + nomDestination);
         return "listeComptes?faces-redirect=true";
     }
     
