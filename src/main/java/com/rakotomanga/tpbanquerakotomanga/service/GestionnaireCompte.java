@@ -6,8 +6,7 @@ package com.rakotomanga.tpbanquerakotomanga.service;
 
 import com.rakotomanga.tpbanquerakotomanga.entities.CompteBancaire;
 import jakarta.annotation.sql.DataSourceDefinition;
-import jakarta.inject.Named;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -34,8 +33,7 @@ import java.util.List;
     }
 )
 
-@Named(value = "gestionnaireCompte")
-@RequestScoped
+@ApplicationScoped
 public class GestionnaireCompte {
     
     @PersistenceContext(unitName = "banquePU")
@@ -47,13 +45,18 @@ public class GestionnaireCompte {
     }
     
     
-    public List<CompteBancaire> getAllCustomers() {
+    public List<CompteBancaire> getAllComptes() {
        Query query = em.createNamedQuery("CompteBancaire.findAll");
        return query.getResultList();
     }
     
+    public Long nbComptes() {
+       Query query = em.createNamedQuery("CompteBancaire.count");
+       return (Long) query.getSingleResult();
+    }
+    
     @Transactional
-    public void persist(CompteBancaire compte) {
+    public void creerCompte(CompteBancaire compte) {
        em.persist(compte);
     }
 }
