@@ -16,27 +16,28 @@
 
             <ui:define name="content">
                 <h:form>
-                    <p:dataTable value="#{listeComptes.allComptes}"
-                                 var="item">
-                        <p:column>
+                    <p:dataTable  value="#{listeComptes.allComptes}" var="item">
+                        <p:column >
                             <f:facet name="header">
                                 <h:outputText value="Id"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
 
-                        <p:column>
+                        <p:column sortBy="#{item.nom}">
                             <f:facet name="header">
                                 <h:outputText value="Nom"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
                         </p:column>
-                        
-                        <p:column>
+
+                        <p:column sortBy="#{item.solde}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
-                            <h:outputText value="#{item.solde}"/>
+                            <h:outputText value="#{item.solde}">
+                                <f:convertNumber pattern="###,###,##0"/>
+                            </h:outputText>
                         </p:column>
                     </p:dataTable>
                 </h:form>
