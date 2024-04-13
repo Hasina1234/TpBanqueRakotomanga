@@ -8,6 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -15,6 +19,11 @@ import java.io.Serializable;
  * @author Hasina
  */
 @Entity
+@Table(name = "CompteBancaire")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c")
+})
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
