@@ -15,7 +15,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
- *
+ * Cette classe représente l'entité CompteBancaire
+ * Cette classe est annotée avec les informations nécessaires pour la persistance en base de données
  * @author Hasina
  */
 @Entity

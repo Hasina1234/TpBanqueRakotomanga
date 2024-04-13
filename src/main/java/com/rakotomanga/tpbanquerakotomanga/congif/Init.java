@@ -29,10 +29,9 @@ public class Init {
     public void init(
             @Observes
             @Initialized(ApplicationScoped.class) ServletContext context) {
-        // Vérifier si la table des comptes est vide en utilisant nbComptes()
+        
         long nbComptes = gestionnaireCompte.nbComptes();
         if (nbComptes == 0) {
-            // Créer les 4 comptes au démarrage de l'application
             this.gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000));
             this.gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000));
             this.gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000));

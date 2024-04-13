@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 
 /**
- *
+ * Façade pour gérer les Comptes.
  * @author Hasina
  */
 
@@ -38,9 +38,7 @@ public class GestionnaireCompte {
     
     @PersistenceContext(unitName = "banquePU")
     private EntityManager em;
-    /**
-     * Creates a new instance of GestionnaireCompte
-     */
+    
     public GestionnaireCompte() {
     }
     
