@@ -71,8 +71,8 @@ public class Modifier implements Serializable{
     }
 
     public void loadCompte() {
-        this.compteBancaire = this.gestionnaireCompte.findById(id);
         this.nom = this.compteBancaire.getNom();
+        this.compteBancaire = this.gestionnaireCompte.findById(id);
         this.solde = this.compteBancaire.getSolde();
     }
     
