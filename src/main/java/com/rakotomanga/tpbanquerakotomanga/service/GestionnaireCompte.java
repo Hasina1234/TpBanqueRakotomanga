@@ -88,5 +88,9 @@ public class GestionnaireCompte {
         update(destination);
     }
 
-    
+    @Transactional
+    public void supprimerCompte(CompteBancaire compte) {
+        em.remove(em.merge(compte));
+    }
+
 }

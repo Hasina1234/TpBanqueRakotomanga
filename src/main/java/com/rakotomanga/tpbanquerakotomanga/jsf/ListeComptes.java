@@ -5,6 +5,7 @@
 package com.rakotomanga.tpbanquerakotomanga.jsf;
 
 import com.rakotomanga.tpbanquerakotomanga.entities.CompteBancaire;
+import com.rakotomanga.tpbanquerakotomanga.jsf.util.Util;
 import com.rakotomanga.tpbanquerakotomanga.service.GestionnaireCompte;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
@@ -14,27 +15,34 @@ import java.util.List;
 
 /**
  * Backing bean pour la page JSF listeComptes
+ *
  * @author Hasina
  */
 @Named(value = "listeComptes")
 @ViewScoped
-public class ListeComptes implements Serializable{
-    
-    private List<CompteBancaire> compteList;  
+public class ListeComptes implements Serializable {
+
+    private List<CompteBancaire> compteList;
 
     @Inject
-    private GestionnaireCompte gestionnaireCompte;  
+    private GestionnaireCompte gestionnaireCompte;
 
     public ListeComptes() {
     }
-    
-    /** 
+
+    /**
      * Retourne la liste de tous les comptes.
-    */  
+     */
     public List<CompteBancaire> getAllComptes() {
-      if (compteList == null) {
-        compteList = gestionnaireCompte.getAllComptes();
-      }
-      return compteList;
-    }  
+        if (compteList == null) {
+            compteList = gestionnaireCompte.getAllComptes();
+        }
+        return compteList;
+    }
+
+    public String supprimerCompte(CompteBancaire compteBancaire) {
+        gestionnaireCompte.supprimerCompte(compteBancaire);
+        Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
+        return "listeComptes?faces-redirect=true";
+    }
 }
