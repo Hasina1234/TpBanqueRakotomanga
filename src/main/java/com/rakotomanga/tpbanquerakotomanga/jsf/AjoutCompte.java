@@ -48,6 +48,9 @@ public class AjoutCompte {
         this.solde = solde;
     }
     
+    /**
+     * Ajout d'un nouveau compte
+     */
     @Transactional
     public String action() {
         boolean erreur = false;

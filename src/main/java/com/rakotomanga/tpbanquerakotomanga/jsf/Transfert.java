@@ -30,6 +30,9 @@ public class Transfert implements Serializable {
     public Transfert() {
     }
     
+    /**
+     * Transfert de solde entre les deux comptes choisi
+     */
     public String transferer() {
         boolean erreur = false;
         CompteBancaire source = gestionnaireCompte.findById(this.getIdSource());

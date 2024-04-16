@@ -39,7 +39,10 @@ public class ListeComptes implements Serializable {
         }
         return compteList;
     }
-
+    
+    /**
+     * Supprimer un compte bancaire 
+     */
     public String supprimerCompte(CompteBancaire compteBancaire) {
         gestionnaireCompte.supprimerCompte(compteBancaire);
         Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
