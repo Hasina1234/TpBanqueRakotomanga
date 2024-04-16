@@ -13,7 +13,7 @@ import jakarta.inject.Inject;
 import java.io.Serializable;
 
 /**
- *
+ * Backing bean pour la page JSF transfert
  * @author Hasina
  */
 @Named(value = "transfert")
@@ -59,7 +59,7 @@ public class Transfert implements Serializable {
         this.gestionnaireCompte.transferer(this.getIdSource(), this.getIdDestination(), this.getSomme());
         String nomSource = source.getNom();
         String nomDestination = destination.getNom();
-        Util.addFlashInfoMessage("Montant: " + somme + ", transferé depuis " + nomSource + " vers " + nomDestination);
+        Util.addFlashInfoMessage("Montant: " + somme + " a été transferé depuis " + nomSource + " vers " + nomDestination);
         return "listeComptes?faces-redirect=true";
     }
     

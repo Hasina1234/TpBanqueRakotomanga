@@ -31,7 +31,7 @@
                             <h:outputText value="#{item.nom}"/>
                         </p:column>
 
-                        <p:column sortBy="#{item.solde}">
+                        <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
