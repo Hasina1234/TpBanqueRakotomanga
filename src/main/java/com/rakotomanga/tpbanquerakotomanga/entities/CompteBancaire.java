@@ -14,14 +14,16 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Cette classe représente l'entité CompteBancaire
- * Cette classe est annotée avec les informations nécessaires pour la persistance en base de données
+ * Cette classe représente l'entité CompteBancaire Cette classe est annotée avec
+ * les informations nécessaires pour la persistance en base de données
+ *
  * @author Hasina
  */
 @Entity
@@ -39,22 +41,24 @@ public class CompteBancaire implements Serializable {
     private Long id;
     private String nom;
     private int solde;
-    
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)  
-    private List<OperationBancaire> operations = new ArrayList<>();  
-                   
+    @Version
+    private int version;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OperationBancaire> operations = new ArrayList<>();
+
     public CompteBancaire() {
     }
-    
+
     public CompteBancaire(String nom, int solde) {
         this.nom = nom;
         this.solde = solde;
         operations.add(new OperationBancaire("Création du compte", solde));
     }
-    
-    public List<OperationBancaire> getOperations() {  
-      return operations;  
-    } 
+
+    public List<OperationBancaire> getOperations() {
+        return operations;
+    }
 
     public void deposer(int montant) {
         solde += montant;
