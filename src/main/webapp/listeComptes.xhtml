@@ -54,6 +54,18 @@
                                 <h:graphicImage name="images/modif.png"/>
                             </h:link>
                         </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText escape="false" value="Historique&lt;br/>opérations"/>
+                            </f:facet>
+                            <h:link outcome="operations">
+                                <f:param name="idCompte" value="#{item.id}" />
+                                <h:outputText value="Détails"/>
+                            </h:link>
+                        </p:column>
+
+
                     </p:dataTable>
                 </h:form>
                 <h:messages/>
